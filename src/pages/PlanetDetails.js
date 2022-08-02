@@ -1,8 +1,10 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 
-export default class PlanetDetails extends React.Component {
-  render() {
-    console.log(this);
-    return <div>Planet Profile page</div>;
-  }
+function PlanetDetails() {
+  let params = useParams();
+  console.log(params);
+  return <h1>Planet Details for {params.planetName}</h1>;
 }
+
+export default PlanetDetails;

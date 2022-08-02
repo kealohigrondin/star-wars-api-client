@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import Table from "../components/Table";
 import { getPlanets } from "../actions";
@@ -46,16 +47,16 @@ class PlanetList extends React.Component {
       return (
         <tr key={planet.name}>
           <td>
-            <a href={planet.url} target="blank">
-              {planet.name}
-            </a>
+            <Link to={`/details/${planet.name}`} >{planet.name}</Link>
           </td>
           <td>{this.formatString(planet.climate)}</td>
           <td>{this.formatString(planet.residents.length)}</td>
           <td>{this.formatString(planet.terrain)}</td>
           <td>{this.formatString(planet.population)}</td>
           <td>
-            {this.formatString(this.calcWaterSurfaceArea(planet.diameter, planet.surface_water))}
+            {this.formatString(
+              this.calcWaterSurfaceArea(planet.diameter, planet.surface_water)
+            )}
           </td>
         </tr>
       );
