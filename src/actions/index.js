@@ -9,7 +9,12 @@ export const getPlanets = () => async (dispatch) => {
     })
     .catch((err) => {
       console.log("hello", err.response);
-      dispatch({ type: GET_PLANETS_ERROR, payload: GET_PLANETS_ERROR});
+      dispatch({ type: GET_PLANETS_ERROR, payload: GET_PLANETS_ERROR });
     });
   // some kind of error state when the swapi call is blocked
+};
+
+//get info for one planet using the url params
+export const getPlanet = (planetName) => {
+  console.log(planetName, "is in the action");
 };

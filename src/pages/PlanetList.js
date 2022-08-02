@@ -69,8 +69,8 @@ class PlanetList extends React.Component {
     }
     if (this.props.planets.length < 1) return <h1>loading planets...</h1>;
     return (
-      <div>
-        <h1>Planets page component</h1>
+      <div style={{paddingTop: "2em"}}>
+        <h2>Planets of STAR WARS</h2>
         <Table
           renderTableHeaders={this.renderTableHeaders}
           renderTableBody={this.renderTableBody}

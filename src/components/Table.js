@@ -11,7 +11,6 @@ class Table extends React.Component {
   render() {
     return (
       <div>
-        <h2>Table component</h2>
         <table className="ui celled table">
           <thead>{this.props.renderTableHeaders()}</thead>
           <tbody>{this.props.renderTableBody()}</tbody>
