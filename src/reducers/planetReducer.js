@@ -9,7 +9,7 @@ const planetReducer = (state = INITIAL_STATE, action) => {
     case GET_PLANETS:
       //map thru the list of keys from the response object and add each to the state
       // as a key value pair of id:payload (payload being the planet object)
-      return { ...state, ..._.mapKeys(action.payload, "name") };
+      return { ...state, ..._.mapKeys(action.payload, "url") };
     case GET_PLANET:
       //get one planet and add to state
       return {...state, [action.payload.name]: action.payload};

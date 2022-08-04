@@ -1,7 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+
 import { getPlanet } from "../actions/index";
+import formatString from "../helpers/formatString";
+import Table from "../components/Table";
 
 class PlanetDetails extends React.Component {
   componentDidMount() {
@@ -13,27 +16,82 @@ class PlanetDetails extends React.Component {
     }
   }
 
+  renderLeftColumn() {
+    return (
+      <div className="six wide column">
+        <h4>Name: {this.props.planet.name}</h4>
+        <h4>Climate: {formatString(this.props.planet.climate)}</h4>
+        <h4>Diameter: {formatString(this.props.planet.diameter)}</h4>
+        <h4>Gravity: {formatString(this.props.planet.gravity)}</h4>
+        <h4>Population: {formatString(this.props.planet.population)}</h4>
+        <h4>Terrain: {formatString(this.props.planet.terrain)}</h4>
+      </div>
+    );
+  }
+
+  renderRightColumn() {
+    return (
+      <div className="ten wide column">
+        <Table
+          renderTableHeaders={this.renderFilmTableHeader}
+          renderTableBody={this.renderFilmTableBody}
+        />
+        <br/>
+        <Table
+          renderTableHeaders={this.renderResidentTableHeader}
+          renderTableBody={this.renderResidentTableBody}
+        />
+      </div>
+    );
+  }
+
+  renderFilmTableHeader = () => {
+    return (
+      <tr>
+        <th>Films Appeared In</th>
+      </tr>
+    );
+  };
+
+  renderFilmTableBody = () => {
+    return this.props.planet.films.map((film) => {
+      return (
+        <tr key={film}>
+          <td>{film}</td>
+        </tr>
+      );
+    });
+  };
+
+  renderResidentTableHeader = () => {
+    return (
+      <tr>
+        <th>Residents</th>
+      </tr>
+    );
+  };
+
+  renderResidentTableBody = () => {
+    return this.props.planet.residents.map((res) => (
+      <tr key={res}>
+        <td>{res}</td>
+      </tr>
+    ));
+  };
   render() {
     if (!this.props.planet) {
       return (
         <div className="ui center aligned container">
-          Please navigate to <Link to="/">Home</Link> to choose a planet
+          Please navigate to <Link to="/planets">Planet List</Link> to choose a planet
         </div>
       );
     }
     return (
-      <div style={{ marginTop: "2em" }}>
+      <div>
         <h2>Planet Details for {this.props.match.params.planetName}</h2>
         <div className="ui stackable grid">
-          <div className="six wide column">
-            <p>Name: {this.props.planet.name}</p>
-            <p>Climate: {this.props.planet.climate}</p>
-            <p>Diameter: {this.props.planet.diameter}</p>
-            <p>Gravity: {this.props.planet.gravity}</p>
-            <p>Population: {this.props.planet.population}</p>
-            <p>Terrain: {this.props.planet.terrain}</p>
-          </div>
-          <div className="ten wide column">right column</div>
+          {this.renderLeftColumn()}
+          {this.renderRightColumn()}
         </div>
       </div>
     );

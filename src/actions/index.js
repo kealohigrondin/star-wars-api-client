@@ -1,5 +1,5 @@
 import swapi from "../api/swapi";
-import { GET_PLANETS, GET_PLANETS_ERROR } from "./types";
+import { GET_PEOPLE, GET_PLANETS, GET_PLANETS_ERROR } from "./types";
 
 export const getPlanets = () => async (dispatch) => {
   swapi
@@ -18,3 +18,25 @@ export const getPlanets = () => async (dispatch) => {
 export const getPlanet = (planetName) => {
   console.log(planetName, "is in the action");
 };
+
+export const getPeople = () => async (dispatch) => {
+  swapi.get("/people").then((response) => {
+    dispatch({ type: GET_PEOPLE, payload: response.data.results });
+  });
+};
+
+export const getFilms = () => {
+  
+}
+
+export const getSpecies = () => {
+  
+}
+
+export const getStarships = () => {
+  
+}
+
+export const getVehicles = () => {
+  
+}

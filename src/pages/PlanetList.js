@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Table from "../components/Table";
 import { getPlanets } from "../actions";
 import { GET_PLANETS_ERROR } from "../actions/types";
+import formatString from "../helpers/formatString";
 
 class PlanetList extends React.Component {
   componentDidMount() {
@@ -16,18 +17,6 @@ class PlanetList extends React.Component {
     const surfaceArea = 4 * Math.PI * ((diameter / 2) ^ 2);
     return Math.floor((surface_water * surfaceArea) / 100);
   }
-
-  /*
-  formatString() returns:
-    "?" if value is "unknown"
-    value when value isn't able to convert to a number
-    otherwise, value as a number with commas (at this point, logically, it must be a number)
-  */
-  formatString = (num) => {
-    if (num === "unknown") return "?";
-    const ret = Math.floor(num).toLocaleString();
-    return ret === "NaN" ? num : ret;
-  };
 
   renderTableHeaders = () => {
     return (
@@ -49,12 +38,12 @@ class PlanetList extends React.Component {
           <td>
             <Link to={`/details/${planet.name}`} >{planet.name}</Link>
           </td>
-          <td>{this.formatString(planet.climate)}</td>
-          <td>{this.formatString(planet.residents.length)}</td>
-          <td>{this.formatString(planet.terrain)}</td>
-          <td>{this.formatString(planet.population)}</td>
+          <td>{formatString(planet.climate)}</td>
+          <td>{formatString(planet.residents.length)}</td>
+          <td>{formatString(planet.terrain)}</td>
+          <td>{formatString(planet.population)}</td>
           <td>
-            {this.formatString(
+            {formatString(
               this.calcWaterSurfaceArea(planet.diameter, planet.surface_water)
             )}
           </td>
@@ -69,7 +58,7 @@ class PlanetList extends React.Component {
     }
     if (this.props.planets.length < 1) return <h1>loading planets...</h1>;
     return (
-      <div style={{paddingTop: "2em"}}>
+      <div>
         <h2>Planets of STAR WARS</h2>
         <Table
           renderTableHeaders={this.renderTableHeaders}
