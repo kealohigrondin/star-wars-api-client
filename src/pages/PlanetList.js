@@ -36,7 +36,7 @@ class PlanetList extends React.Component {
       return (
         <tr key={planet.name}>
           <td>
-            <Link to={`/details/${planet.name}`} >{planet.name}</Link>
+            <Link to={`/planets/${planet.name}`} >{planet.name}</Link>
           </td>
           <td>{formatString(planet.climate)}</td>
           <td>{formatString(planet.residents.length)}</td>
