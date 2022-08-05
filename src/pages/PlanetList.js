@@ -70,7 +70,7 @@ class PlanetList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  //Object.parse parses out the objects from the values of the KV pairs in state.planets
+  //Object.values parses out the objects from the values of the KV pairs in state.planets
   return {
     planets: Object.values(state.planets),
   };

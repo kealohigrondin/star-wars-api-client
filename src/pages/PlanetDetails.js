@@ -16,34 +16,7 @@ class PlanetDetails extends React.Component {
     }
   }
 
-  renderLeftColumn() {
-    return (
-      <div className="six wide column">
-        <h4>Name: {this.props.planet.name}</h4>
-        <h4>Climate: {formatString(this.props.planet.climate)}</h4>
-        <h4>Diameter: {formatString(this.props.planet.diameter)}</h4>
-        <h4>Gravity: {formatString(this.props.planet.gravity)}</h4>
-        <h4>Population: {formatString(this.props.planet.population)}</h4>
-        <h4>Terrain: {formatString(this.props.planet.terrain)}</h4>
-      </div>
-    );
-  }
-
-  renderRightColumn() {
-    return (
-      <div className="ten wide column">
-        <Table
-          renderTableHeaders={this.renderFilmTableHeader}
-          renderTableBody={this.renderFilmTableBody}
-        />
-        <br/>
-        <Table
-          renderTableHeaders={this.renderResidentTableHeader}
-          renderTableBody={this.renderResidentTableBody}
-        />
-      </div>
-    );
-  }
+  
 
   renderFilmTableHeader = () => {
     return (
@@ -78,11 +51,62 @@ class PlanetDetails extends React.Component {
       </tr>
     ));
   };
+  
+  renderFilmTable() {
+    if (this.props.planet.films.count <= 0) {
+      return null;
+    }
+    return (
+      <>
+        <Table
+          renderTableHeaders={this.renderFilmTableHeader}
+          renderTableBody={this.renderFilmTableBody}
+        />
+        <br />
+      </>
+    );
+  }
+
+  renderResidentsTable() {
+    if (this.props.planet.residents.length <= 0) {
+      return null;
+    }
+    return (
+      <Table
+        renderTableHeaders={this.renderResidentTableHeader}
+        renderTableBody={this.renderResidentTableBody}
+      />
+    );
+  }
+
+  renderLeftColumn() {
+    return (
+      <div className="six wide column">
+        <h4>Name: {this.props.planet.name}</h4>
+        <h4>Climate: {formatString(this.props.planet.climate)}</h4>
+        <h4>Diameter: {formatString(this.props.planet.diameter)}</h4>
+        <h4>Gravity: {formatString(this.props.planet.gravity)}</h4>
+        <h4>Population: {formatString(this.props.planet.population)}</h4>
+        <h4>Terrain: {formatString(this.props.planet.terrain)}</h4>
+      </div>
+    );
+  }
+
+  renderRightColumn() {
+    return (
+      <div className="ten wide column">
+        {this.renderFilmTable()}
+        {this.renderResidentsTable()}
+      </div>
+    );
+  }
+
   render() {
     if (!this.props.planet) {
       return (
         <div className="ui center aligned container">
-          Please navigate to <Link to="/planets">Planet List</Link> to choose a planet
+          Please navigate to <Link to="/planets">Planet List</Link> to choose a
+          planet
         </div>
       );
     }

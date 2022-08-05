@@ -20,23 +20,17 @@ export const getPlanet = (planetName) => {
 };
 
 export const getPeople = () => async (dispatch) => {
-  swapi.get("/people").then((response) => {
+  swapi
+  .get("/people")
+  .then((response) => {
     dispatch({ type: GET_PEOPLE, payload: response.data.results });
   });
 };
 
-export const getFilms = () => {
-  
-}
+export const getFilms = () => {};
 
-export const getSpecies = () => {
-  
-}
+export const getSpecies = () => {};
 
-export const getStarships = () => {
-  
-}
+export const getStarships = () => {};
 
-export const getVehicles = () => {
-  
-}
+export const getVehicles = () => {};
