@@ -1,3 +1,7 @@
+# Star Wars API (SWAPI) front end in react v18
+Originally a coding exercise for Truss.Works interview, I've since expanded functionality beyond the scope of what was required for the interview
+
+
 # How to run this app
 1. download git https://git-scm.com/download/win 
 2. clone this repository to your machine using 'git clone https://git-scm.com/download/win'
